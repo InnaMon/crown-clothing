@@ -18,6 +18,34 @@ const config = {
   firebase.initializeApp(config);
   //initializes app
 
+  export const createUserProfileDocument = async (userAuth, additionalData) => {
+    if (!userAuth) return;
+    //created queryReference
+    const userRef = firestore.doc(`users/${userAuth.uid}`);
+    //get snapshotObject object from referenceObject using get()
+    const snapShot = await userRef.get();
+
+    if(!snapShot.exists) {
+      //create a piece of data here using documentRef objects with CRUD
+      const { displayName, email } = userAuth;
+      const createdAt = new Date(); //tracks WHEN that user data was made
+
+      try {
+        await userRef.set({
+          displayName,
+          email,
+          createdAt,
+          ...additionalData
+        })
+      } catch(error) {
+        console.log('error creating user', error.message)
+      }
+    }
+    return userRef;
+  }
+
+  
+
   export const auth = firebase.auth();
   export const firestore = firebase.firestore();
   //gives access to default project's Firebase services throught app
