@@ -6,7 +6,7 @@ import './CollectionPreview.scss';
 
 //on every render where CollcetionPreview is used
 //this comp will be rerendered and the function with modification
-//will be rerednered every time = performance issue :( )
+//will be rerednered every time = performance issue :-( )
 const CollectionPreview = ({ title, items }) => (
     <div className='collection-preview'>
         <h1 className='title'>{title}</h1>
@@ -14,8 +14,8 @@ const CollectionPreview = ({ title, items }) => (
             {
                 items
                 .filter((item, idx) => idx < 4)
-                .map(({ id, ...otherItemProps }) => (
-                <CollectionItem key={id} { ...otherItemProps } />
+                .map(item => (
+                <CollectionItem key={item.id} item={item} />
                 ))
             }
         </div>
