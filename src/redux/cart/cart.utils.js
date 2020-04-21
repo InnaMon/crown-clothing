@@ -33,5 +33,5 @@ export const removeItem = (cartItems, cartItemToDecrement) => {
             ? { ...cartItem, quantity: cartItem.quantity - 1 }
             : cartItem
         )
-    }
+    } 
 }
