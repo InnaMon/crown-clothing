@@ -1,6 +1,6 @@
 .menu-item {
     min-width: 30%;
-    height: 240px;
+    height: 200px;
     flex: 1 1 auto;
     display: flex;
     align-items: center;
@@ -24,7 +24,7 @@
     }
 
     &.large {
-      height: 380px;
+      height: 200px;
     }
   
     &:first-child {
@@ -63,6 +63,15 @@
       .subtitle {
         font-weight: lighter;
         font-size: 16px;
+      }
+    }
+  }
+
+  @media only screen and (min-width: 800px) {
+    .menu-item {
+      height: 240px;
+      &.large {
+        height: 380px;
       }
     }
   }

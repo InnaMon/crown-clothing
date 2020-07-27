@@ -1,7 +1,8 @@
 .sign-in {
-    width: 380px;
+    width: auto;
     display: flex;
     flex-direction: column;
+    padding: 0 20px;
 
     .title {
         margin: 10px 0;
@@ -10,5 +11,12 @@
     .buttons {
         display: flex;
         justify-content: space-between;
+    }
+  }
+
+  @media only screen and (min-width: 850px) {
+    .sign-in {
+        width: 380px;
+        padding: 0;
     }
   }
