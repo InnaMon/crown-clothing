@@ -1,14 +1,11 @@
-import React from 'react';
+import React, { lazy, Suspense } from 'react';
 import { Route, Switch, Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 
 import './App.css';
 
-import HomePage from './pages/homepage/HomePage';
-import ShopPage from './pages/shop-page/ShopPage';
-import SignInAndSignUp from './pages/sign-in-and-sign-up-page/SignInAndSignUp';
-import CheckoutPage from './pages/checkout-page/CheckoutPage';
+import Spinner from './components/WithSpinner/Spinner';
 
 import Header from './components/Header/Header';
 
@@ -16,6 +13,11 @@ import { auth, createUserProfileDocument } from './firebase/firebase.utils';
 
 import { setCurrentUser } from './redux/user/user.actions';
 import { selectCurrentUser } from './redux/user/user.selectors';
+
+const HomePage = lazy(() => import('./pages/homepage/HomePage'));
+const ShopPage = lazy(() => import('./pages/shop-page/ShopPage'));
+const SignInAndSignUp = lazy(() => import('./pages/sign-in-and-sign-up-page/SignInAndSignUp'));
+const CheckoutPage = lazy(() => import('./pages/checkout-page/CheckoutPage'));
 
 class App extends React.Component {
   unsubscribeFromAuth = null;
@@ -48,23 +50,23 @@ class App extends React.Component {
       <div>
         <Header />
         <Switch>
-          <Route exact path='/' component={HomePage} />
-          <Route  path='/shop' component={ShopPage} />
-          <Route exact path='/checkout' component={CheckoutPage} />
-          <Route  exact path='/signin' render={() => 
-            this.props.currentUser ? (
-            <Redirect to='/' />
-            ) : (
-            <SignInAndSignUp />
-            )} 
-          />
+          <Suspense fallback={<Spinner />}>
+            <Route exact path='/' component={HomePage} />
+            <Route  path='/shop' component={ShopPage} />
+            <Route exact path='/checkout' component={CheckoutPage} />
+            <Route  exact path='/signin' render={() => 
+              this.props.currentUser ? (
+              <Redirect to='/' />
+              ) : (
+              <SignInAndSignUp />
+              )} 
+            />
+          </Suspense>
         </Switch>
       </div>
     );
   }
 }
-
-//import createStructuredSelector if we have more selectors in the future
 
 const mapStateToProps = createStructuredSelector({
   currentUser: selectCurrentUser

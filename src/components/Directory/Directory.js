@@ -26,9 +26,6 @@ const Directory = ({ sections }) => {
     stopLoader()
   }, [counter, sections])
 
-  console.log('counter', counter)
-  console.log('sections.length', sections.length)
-
  return (<>  
   <div style={{display: loading ? "block" : "none"}}>
     <Spinner />
