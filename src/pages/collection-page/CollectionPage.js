@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 
 import { selectCollectionId } from '../../redux/shop/shop.selector';
 
-import CollectionItem from '../../components/CheckoutItem/CheckoutItem';
+import CollectionItem from '../../components/CollectionItem/CollectionItem';
 
 import './CollectionPage.scss';
 
