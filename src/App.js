@@ -6,8 +6,8 @@ import { createStructuredSelector } from 'reselect';
 import './App.css';
 
 import Spinner from './components/WithSpinner/Spinner';
-
 import Header from './components/Header/Header';
+import ErrorBoundary from './components/ErrorBoundary/ErrorBoundary';
 
 import { auth, createUserProfileDocument } from './firebase/firebase.utils';
 
@@ -50,18 +50,20 @@ class App extends React.Component {
       <div>
         <Header />
         <Switch>
-          <Suspense fallback={<Spinner />}>
-            <Route exact path='/' component={HomePage} />
-            <Route  path='/shop' component={ShopPage} />
-            <Route exact path='/checkout' component={CheckoutPage} />
-            <Route  exact path='/signin' render={() => 
-              this.props.currentUser ? (
-              <Redirect to='/' />
-              ) : (
-              <SignInAndSignUp />
-              )} 
-            />
-          </Suspense>
+          <ErrorBoundary>
+            <Suspense fallback={<Spinner />}>
+              <Route exact path='/' component={HomePage} />
+              <Route  path='/shop' component={ShopPage} />
+              <Route exact path='/checkout' component={CheckoutPage} />
+              <Route  exact path='/signin' render={() => 
+                this.props.currentUser ? (
+                <Redirect to='/' />
+                ) : (
+                <SignInAndSignUp />
+                )} 
+              />
+            </Suspense>
+          </ErrorBoundary>
         </Switch>
       </div>
     );
