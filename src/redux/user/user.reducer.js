@@ -17,6 +17,3 @@ const userReducer = (state = INITIAL_STATE, action) => {
 }
 
 export default userReducer;
-
-//in the return statement, you create a new empty obj, assign to it the ild/current state, and then 
-// assign to it the action.payload which OVERWRITES same keys because it is a later source 
