@@ -18,6 +18,8 @@ const HomePage = lazy(() => import('./pages/homepage/HomePage'));
 const ShopPage = lazy(() => import('./pages/shop-page/ShopPage'));
 const SignInAndSignUp = lazy(() => import('./pages/sign-in-and-sign-up-page/SignInAndSignUp'));
 const CheckoutPage = lazy(() => import('./pages/checkout-page/CheckoutPage'));
+const ContactPage = lazy(() => import('./pages/contact-page/ContactPage'));
+const ThankyouPage = lazy(() => import('./pages/contact-page/ThankyouPage'));
 
 class App extends React.Component {
   unsubscribeFromAuth = null;
@@ -55,6 +57,8 @@ class App extends React.Component {
               <Route exact path='/' component={HomePage} />
               <Route  path='/shop' component={ShopPage} />
               <Route exact path='/checkout' component={CheckoutPage} />
+              <Route exact path='/contact' component={ContactPage} />
+              <Route exact path='/contact/thank-you-page' component={ThankyouPage} />
               <Route  exact path='/signin' render={() => 
                 this.props.currentUser ? (
                 <Redirect to='/' />
